@@ -2,6 +2,18 @@
   <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
     <div class="detail" v-show="detailShow">
       详情页
+      <br>
+      <br>
+      <h2>{{seller.name}}</h2>
+      <br>
+      <h2>{{seller.bulletin}}</h2>
+      <br>
+      <ul>
+        <li v-for="item in seller.supports">
+          {{item.description}}
+        </li>
+      </ul>
+      <button class="close" @click="hideDetail">关闭</button>
     </div>
   </transition>
 </template>
@@ -13,8 +25,14 @@
   export default {
     computed: {
       ...mapGetters([
-        'detailShow'
+        'detailShow',
+        'seller'
       ])
+    },
+    methods: {
+      hideDetail() {
+        this.$store.dispatch('hideDetail');
+      }
     }
   }
 </script>
@@ -29,5 +47,11 @@
     background-color: rgba(7, 17, 27, 0.8);
     z-index: 666;
     overflow: auto;
+    color: #fff;
+    .close {
+      position: absolute;
+      bottom: 50px;
+      left: 43%;
+    }
   }
 </style>
